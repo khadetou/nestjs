@@ -5,6 +5,7 @@ export class GetTasksFilterDto {
     @IsOptional()
     @IsEnum(TaskStatus)
     readonly status?: TaskStatus;
+    
     @IsOptional()
     @IsString()
     readonly search?: string;
