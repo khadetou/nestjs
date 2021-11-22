@@ -1,9 +1,9 @@
-
+import { UpdateTaskStatusDto } from './upadate-task-status.dto';
 import { TasksService } from './tasks.service';
-import { Body, Controller, Get, Param, Post} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Patch } from '@nestjs/common';
 import { Task } from './task.entity';
-import {v4 as uuid} from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
+
 
 
 @Controller('tasks')
@@ -43,13 +43,22 @@ export class TasksController {
     //     return this.tasksService.createTask(createTaskDto);
     // }
 
+    @Patch('/:id/status')
+    updateTaskStatus(@Param('id') id: string,@Body('status') updateTaskStatusDto: UpdateTaskStatusDto): Promise<Task> { 
+        const { status } = updateTaskStatusDto;
+        return this.tasksService.updateTaskStatus(id, status);
+    }
+
     // @Patch('/:id/status')
     // updateTaskStatus(@Param('id') id: string,@Body() updateTaskStatusDto: UpdateTaskStatusDto): Task {
     //     const {status} = updateTaskStatusDto;
     //     return this.tasksService.updateTaskStatus(id, status);
     // }
     
-
+    @Delete('/:id')
+    deleteTask(@Param('id') id: string): Promise<void> {
+        return this.tasksService.deleteTask(id);
+    }
     // @Delete('/:id')
     // deleteTask(@Param('id') id: string) {
     //     this.tasksService.deleteTask(id);
