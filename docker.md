@@ -16,3 +16,8 @@
 
 
 ### postgres-nest is the name of our image created on the top
+
+
+
+### Dowload a list of images from docker.yaml
+`docker-compose up -d`
